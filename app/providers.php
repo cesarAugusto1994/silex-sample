@@ -46,17 +46,17 @@ $app->register(new \Silex\Provider\TranslationServiceProvider(), array(
 ));
 $app->register(new \Silex\Provider\LocaleServiceProvider());
 $app->register(new Silex\Provider\SessionServiceProvider());
-$app["security.firewalls"] = array();
-$app->register(new Silex\Provider\SecurityServiceProvider());
-$app->register(new Silex\Provider\RememberMeServiceProvider());
+//$app["security.firewalls"] = array();
+//$app->register(new Silex\Provider\SecurityServiceProvider());
+//$app->register(new Silex\Provider\RememberMeServiceProvider());
 $app->register(new Silex\Provider\HttpCacheServiceProvider(),array('http_cache.cache_dir'=>__DIR__.'/var/cache/temp/http'));
-
+/*
 $app['security.firewalls'] = array(
     'secured_area' => array(
         'pattern' => '^/admin/$',
         'form' => array(
             'login_path' => 'admin/login',
-            'check_path' => 'admin/login_check',
+            'check_path' => '/admin/login_check',
             "default_target_path" => "/admin/user/profile",
             "always_use_default_target_path" => true,
             'username_parameter' => 'login[username]',
@@ -96,7 +96,7 @@ $app['security.encoder_factory'] = function ($app) {
         )
     );
 };
-
+*/
 $app->boot();
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
