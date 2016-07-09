@@ -1,0 +1,41 @@
+{% extends 'base.twig' %}
+    {% block title %}Register{% endblock %}
+    {% block head %}{{ parent() }}
+        <link rel="stylesheet" href="/assets/custom/css/signin.css"/>
+    {% endblock %}
+{% block content %}
+    <form action="{{ path('register') }}" method="post" class="form-signin">
+    <h2 class="form-signin-heading">Register</h2>
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <div>
+            <div class='form-input'>
+                {{ form_widget(form.name) }}
+                {{ form_errors(form.name) }}
+            </div>
+        </div>
+        <div>
+            <div class='form-input'>
+                {{ form_widget(form.email) }}
+                {{ form_errors(form.email) }}
+            </div>
+        </div>
+        <div>
+            <div class='form-input'>
+                {{ form_widget(form.password) }}
+                {{ form_errors(form.password) }}
+            </div>
+        </div>
+        {% if error is defined %}
+            <div class="alert alert-warning alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">×</span></button>
+                <strong>Opss...</strong> {{ error }}
+            </div>
+        {% endif %}
+        {{ form_widget(form.save) }}
+        <a class="label label-danger" href="{{ app.url_generator.generate('login') }}">Go back</a>
+        {{ form_end(form) }}
+    </form>
+
+{% endblock %}

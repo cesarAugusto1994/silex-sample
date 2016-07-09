@@ -1,0 +1,29 @@
+{% extends 'base.twig' %}
+    {% block title %}Login{% endblock %}
+    {% block head %}{{ parent() }}
+        <link rel="stylesheet" href="/assets/custom/css/signin.css"/>
+    {% endblock %}
+{% block content %}
+    {% if sucesso is defined %}
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+            <strong>Sucesso!</strong> {{ sucesso }}
+        </div>
+    {% endif %}
+    {% if error is defined and error|length > 0 %}
+        <div class="alert alert-info" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+            <strong>Erro!</strong> {{ error }}
+        </div>
+    {% endif %}
+    <form method="post" action="{{ path('login_check') }}" class="form-signin">
+        <h2 class="form-signin-heading">Sign in</h2>
+        <input type="email" name="_username" id="email" class="form-control" placeholder="E-mail" value="" autofocus="autofocus" required/>
+        <input type="password" name="_password" id="password" class="form-control" placeholder="Password" required/>
+        <button class="btn btn-lg btn-link btn-block">Login</button>
+        <a class="label label-default" href="{{ app.url_generator.generate('forget_pass') }}">I forget my Pass</a>
+        <a class="label label-default" href="{{ app.url_generator.generate('register') }}">Register Now</a>
+    </form>
+{% endblock %}

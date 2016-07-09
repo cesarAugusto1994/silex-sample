@@ -1,0 +1,26 @@
+{% extends 'template.twig' %}
+    {% block title %}Users List{% endblock %}
+    {% block head %}{{ parent() }}
+    {% endblock %}
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>E-mail</th>
+            <th>Created</th>
+        </tr>
+        </thead>
+        <tbody>
+            {%  for user in users %}
+            <tr>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.created|date('d/M/y') }}</td>
+            </tr>
+            {% else %}
+                <tr><td><em>Nada encontrado.</em></td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
