@@ -25,4 +25,22 @@ class UserRepository extends EntityRepository
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush($user);
     }
+
+    /**
+     * @param $loja
+     * @param $nome
+     * @param $ativo
+     * @return array
+     */
+    public function findUser($loja, $nome, $ativo)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.loja = :loja')
+            ->andWhere('u.username LIKE :username')
+            ->andWhere('u.active = :active')
+            ->setParameter('loja', $loja)
+            ->setParameter('username', '%'.$nome.'%')
+            ->setParameter('active', $ativo)
+            ->getQuery()->getResult();
+    }
 }

@@ -40,12 +40,23 @@ class User
      * @ORM\Column(name="username", type="string", length=80)
      * @var string
      */
-    private $name;
+    private $username;
+    /**
+     * @ORM\Column(name="loja", type="integer")
+     * @var integer
+     */
+    private $loja;
     /**
      * @ORM\Column(name="email", type="string", length=80, unique=true)
      * @var string
      */
     private $email;
+
+    /**
+     * @ORM\Column(name="login", type="string", length=50)
+     * @var
+     */
+    private $login;
     /**
      * @ORM\Column(name="password", type="string", length=50)
      * @var string
@@ -59,14 +70,14 @@ class User
      */
     private $active;
 
-    public function getName()
+    public function getUsername()
     {
-        return $this->name;
+        return $this->username;
     }
 
-    public function setName($name)
+    public function setUsername($username)
     {
-        return $this->name = filter_var($name, FILTER_SANITIZE_STRING);
+        return $this->username = filter_var($username, FILTER_SANITIZE_STRING);
     }
 
     public function getEmail()
@@ -145,6 +156,40 @@ class User
      */
     public function isPasswordLegal()
     {
-        return ($this->name !== $this->password);
+        return ($this->username !== $this->password);
     }
+
+    /**
+     * @param int $loja
+     */
+    public function setLoja($loja)
+    {
+        $this->loja = $loja;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getLoja()
+    {
+        return $this->loja;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLogin()
+    {
+        return $this->login;
+    }
+
+    /**
+     * @param mixed $login
+     */
+    public function setLogin($login)
+    {
+        $this->login = $login;
+    }
+
+    
 }

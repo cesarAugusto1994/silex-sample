@@ -17,11 +17,15 @@ $app['email.confirmation.repository'] = function () use ($app) {
     return $app['orm.em']->getRepository(\Application\Entity\EmailConfirmation::class);
 };
 
+$app['loja.repository'] = function() {
+    return range(1, 60);
+};
+
 /**
  * Controllers
  */
 $app['user.controller'] = function ($app) {
-    return new \Application\Controller\UserController($app['user.repository']);
+    return new \Application\Controller\UserController($app['user.repository'], $app);
 };
 
 $app['security.controller'] = function () use ($app) {
@@ -45,7 +49,7 @@ $app['user.email.service'] = function() use ($app){
     $from = 'cezzaar@gmail.com';
     $body = $app['twig']->render('email_confirmation.twig', ['body' => 'Bem Vindo', 'uuid' => $app['uuid.service']]);
 
-    return new EmailService($assunto, $from, $body);
+    return new \Application\Service\EmailService($assunto, $from, $body);
 };
 
 $app['uuid.service'] = function(){

@@ -3,7 +3,6 @@
 namespace Application\Controller;
 
 use Application\Entity;
-use Entities\User;
 use Silex\Application;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -31,13 +30,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 class UserController
 {
     /**
-     * @var Entity\UserRepository
+     * @var Entity\User
      */
     protected $repository;
     
-    public function __construct(Entity\UserRepository $userRepository)
+    private $app;
+    
+    public function __construct(Entity\UserRepository $userRepository, Application $app)
     {
         $this->repository = $userRepository;
+        $this->app = $app;
     }
 
     /**
@@ -90,11 +92,17 @@ class UserController
     }
 
     /**
-     * @param Application $app
-     * @return mixed
+     * @return null|object
      */
-    public function getUsers(Application $app)
+    public function getUsers($loja = 2, $name = '')
     {
-        return $app['twig']->render('admin/users_list.twig', ['users' => $this->repository->findAll()]);
+        return $this->app['twig']->render('admin/users_list.twig', 
+            [
+                'users' => $this->repository->findUser($loja, $name, true), 
+                'lojas' => $this->app['loja.repository'],
+                'loja_request' => filter_input(INPUT_GET, 'loja'),
+                'nome_request' => filter_input(INPUT_GET, 'nome'),
+                'login_request' => filter_input(INPUT_GET, 'login'),
+            ]);
     }
 }

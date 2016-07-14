@@ -3,24 +3,73 @@
     {% block head %}{{ parent() }}
     {% endblock %}
 {% block content %}
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>E-mail</th>
-            <th>Created</th>
-        </tr>
-        </thead>
-        <tbody>
-            {%  for user in users %}
-            <tr>
-                <td>{{ user.name }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.created|date('d/M/y') }}</td>
-            </tr>
-            {% else %}
-                <tr><td><em>Nada encontrado.</em></td></tr>
-            {% endfor %}
-        </tbody>
-    </table>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+
+                <div class="box-header">
+                    <h3 class="box-title">Usu&aacute;rios WebPDV</h3>
+                </div><!-- /.box-header -->
+
+                <form role="form" class="form-inline" action="{{ path('users_list_find') }}" method="get">
+                    <div class="box-body">
+                        <label>Loja:
+                            <select name="loja">
+                                <option value=""></option>
+                                {% for loja in lojas %}
+                                    <option value="{{ loja }}"
+                                            {% if loja == loja_request %}
+                                                selected="selected"
+                                            {% endif %}
+                                    >{{ loja }}</option>
+                                {% endfor %}
+                            </select>
+                        </label>
+                        <label>Name:
+                            <input type="text" name="username" id="username" class="form-control"
+                                   value="{{ nome_request }}"/>
+                        </label>
+                        <label>Login:
+                            <input type="text" name="login" id="login" class="form-control"
+                                   value="{{ login_request }}"/>
+                        </label>
+                        <button type="submit" class="btn btn-link"><span
+                                    class=" glyphicon glyphicon-search"> Pesquisar</span>
+                        </button>
+                    </div>
+                </form>
+                <div class="box-body table-responsive no-padding">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Created</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.username|convert_encoding('UTF-8', 'iso-8859-1') }}</td>
+                                <td>{{ user.created|date('d/F/y g:i A') }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td><em>Nada encontrado.</em></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th colspan="3"></th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
 {% endblock %}

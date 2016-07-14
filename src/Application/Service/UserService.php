@@ -43,8 +43,10 @@ class UserService
         $password = $encoder->encodePassword($request->get('form')['password'], '');
 
         $user = new User();
-        $user->setName($request->get('form')['name']);
+        $user->setUsername($request->get('form')['name']);
         $user->setEmail($request->get('form')['email']);
+        $user->setLoja(1);
+        $user->setLogin($request->get('form')['email']);
         $user->setPassword($password);
         $user->setCreated(new \DateTime('now'));
         $user->setActive(true);

@@ -7,16 +7,25 @@
  */
 
 $app->register(new \Silex\Provider\DoctrineServiceProvider(), array(
-    'db.options' => array(
-        'dbname' => 'silex',
-        'user' => 'root',
-        'password' => 'mestre',
-        'host' => 'localhost',
-        'driver' => 'pdo_mysql',
+    'dbs.options' => array(
+        'server' => array(
+            'dbname' => 'webpdv',
+            'user' => 'webpdv',
+            'password' => 'p@lerm02156',
+            'host' => '192.168.111.2',
+            'driver' => 'pdo_mysql',
+        ),
+        'default' => array(
+            'dbname' => 'silex',
+            'user' => 'root',
+            'password' => 'mestre',
+            'host' => 'localhost',
+            'driver' => 'pdo_mysql',
+        )
     ),
 ));
 $app->register(new \Dflydev\Provider\DoctrineOrm\DoctrineOrmServiceProvider(), array(
-    'orm.proxies_dir' => __DIR__.'/../var/cache/doctrine',
+    'orm.proxies_dir' => __DIR__.'/../var/cache/doctrine/',
     'orm.em.options' => array(
         'mappings' => array(
             array(
@@ -97,6 +106,19 @@ $app['security.encoder_factory'] = function ($app) {
     );
 };
 */
+
+$app['security.encoder.digest'] = function () {
+    return new \Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder('sha1', false, 1);
+};
+$app['security.encoder_factory'] = function ($app) {
+    return new \Symfony\Component\Security\Core\Encoder\EncoderFactory(
+        array(
+            'Symfony\Component\Security\Core\User\UserInterface' => $app['security.encoder.digest'],
+            'Entity\User' => $app['security.encoder.digest'],
+        )
+    );
+};
+
 $app->boot();
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
