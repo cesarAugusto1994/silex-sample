@@ -16,10 +16,10 @@ $app->register(new \Silex\Provider\DoctrineServiceProvider(), array(
             'driver' => 'pdo_mysql',
         ),
         'default' => array(
-            'dbname' => 'u690716366_silex',
-            'user' => 'u690716366_cesar',
-            'password' => 'elpro1973',
-            'host' => 'mysql.hostinger.com.br',
+            'dbname' => 'silex',
+            'user' => 'root',
+            'password' => 'mestre',
+            'host' => 'localhost',
             'driver' => 'pdo_mysql',
         )
     ),

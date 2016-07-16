@@ -6,11 +6,3 @@
 .idea
 vendor
 composer.phar
-var/
-web/assets/bootstrap/css/bootstrap.css.map
-web/assets/custom/css/AdminLTE.css
-web/assets/custom/css/AdminLTE.min.css
-web/assets/custom/css/skins/
-web/assets/custom/img/
-web/assets/custom/js/
-web/assets/plugins/
