@@ -18,6 +18,7 @@
         "swiftmailer/swiftmailer": "^5.4",
         "ramsey/uuid": "^3.4",
         "symfony/security": "^3.1",
-        "filp/whoops": "^2.1"
+        "filp/whoops": "^2.1",
+        "nymo/silex-twig-breadcrumb-extension": "~2.0"
     }
 }

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3fb16b7c9a25e5af0665e541cbd4c5d0",
-    "content-hash": "4776e227fcdbcc5e41cf65eff74631c9",
+    "hash": "42eb2656ec1dca7f47ae0e7ff2d1b7aa",
+    "content-hash": "4329bcb23ff872f5477919f5ca6afedd",
     "packages": [
         {
             "name": "dflydev/doctrine-orm-service-provider",
@@ -764,6 +764,54 @@
                 "silex"
             ],
             "time": "2016-06-01 05:51:46"
+        },
+        {
+            "name": "nymo/silex-twig-breadcrumb-extension",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nymo/silex-twig-breadcrumb-extension.git",
+                "reference": "17c3fc8b9e1e0a16611d77a296793301f60be27e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nymo/silex-twig-breadcrumb-extension/zipball/17c3fc8b9e1e0a16611d77a296793301f60be27e",
+                "reference": "17c3fc8b9e1e0a16611d77a296793301f60be27e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9",
+                "silex/silex": "^2.0",
+                "symfony/twig-bridge": "~2.3|^3.0",
+                "twig/twig": "^1.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "nymo\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gregor Panek",
+                    "email": "gp@gregorpanek.de",
+                    "homepage": "http://www.gregorpanek.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Twig breadcrumb extension for use in silex",
+            "homepage": "http://github.com/nymo/silex-twig-breadcrumb-extension",
+            "keywords": [
+                "breadcrumbs",
+                "extension",
+                "silex",
+                "twig"
+            ],
+            "time": "2016-06-12 15:50:42"
         },
         {
             "name": "paragonie/random_compat",

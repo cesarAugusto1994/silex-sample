@@ -17,8 +17,10 @@ $app['email.confirmation.repository'] = function () use ($app) {
     return $app['orm.em']->getRepository(\Application\Entity\EmailConfirmation::class);
 };
 
-$app['loja.repository'] = function() {
-    return range(1, 60);
+$app['loja.repository'] = function() use ($app){
+    $filiais =  range(1, 60);
+    $centrais = [101,102,103,104,109,111];
+    return array_merge($filiais, $centrais);
 };
 
 /**

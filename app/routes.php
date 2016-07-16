@@ -16,11 +16,32 @@ $app->get('/login', function() use ($app) {
     return $app['twig']->render('login.twig');
 })->bind('login');
 
-$app->post('/admin/login_check', function() use($app) {
-    return $app->redirect('index');
+$app->post('/admin/login_check', function(Request $request) use($app) {
+    return $app['user.controller']->loginCheck($request);
 })->bind('login_check');
 
-$app->get('/admin/logout')->bind('logout');
+$app->error(function (\Exception $e, $code) use ($app) {
+    if (404 === $code) {
+        return $app->redirect($app['url_generator']->generate('not_found'));
+    }
+});
+
+$app->get('/logout', function() use($app){
+    $app['session']->remove('user');
+    return $app->redirect('login');
+})->bind('logout');
+
+$app->get('/lockscreen', function() use($app){
+    return $app['twig']->render('lockscreen.twig');
+})->bind('lockscreen');
+
+$app->get('/profile/{idUser}', function($idUser) use($app){
+    return $app['user.controller']->getUserProfile($idUser);
+})->bind('profile');
+
+$app->get('/update_user/{idUser}', function($idUser, Request $request) use($app){
+    return $app['user.controller']->updateUser($idUser, $request);
+})->bind('update_user');
 
 $app->match('/register',function (Request $request) use ($app) {
     return $app['user.controller']->createUser($request, $app);

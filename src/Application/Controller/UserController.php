@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryBuilder;
@@ -67,7 +68,7 @@ class UserController
                 'min' => 6, 'minMessage' => 'Sua Senha deve possuir mais de {{ limit }} caracteres.',])],
             'attr' => array('class' => 'form-control', 'placeholder' => 'Your Password')
         ])->add('save', SubmitType::class, [
-                'attr' => ['class' => 'btn btn-lg btn-link btn-block', 'value' => 1]
+                'attr' => ['class' => 'btn btn-primary btn-block btn-flat', 'value' => 1]
             ]
         )->getForm();
         
@@ -89,6 +90,66 @@ class UserController
         }
 
         return $app['twig']->render('register.twig', ['form' => $form->createView()]);
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function updateUser($id, Request $request)
+    {
+        /**
+         * User $user
+         */
+        $user = $this->app['user.repository']->find($id);
+
+        $user->setUsername($request->get('username'));
+        $user->setEmail($request->get('email'));
+        $user->setLogin($request->get('login'));
+        $user->setLoja($request->get('loja'));
+
+        $this->app['user.repository']->save($user);
+
+        return $this->app->redirect('/profile/'.$id);
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function loginCheck(Request $request)
+    {
+        $user = $this->app['user.repository']->findBy(['email' => $request->get('_username')]);
+
+        if (!$user) {
+            return $this->app['twig']->render('login.twig',['error' => 'Usuario nao encontrado.']);
+        }
+
+        $this->app['session']->set('user', array('user' => $user[0]));
+
+        //$this->app['breadcrumbs']->addItem('A simple route',array('route' => 'simple_named_route'));
+
+        return $this->app['twig']->render('/admin/index.twig', ['nome_aplicacao' => $this->app['application.name']]);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getUserProfile($id)
+    {
+        $user = $this->app['user.repository']->find($id);
+
+        if (!$user) {
+            return $this->app['twig']->render('/admin/index.twig', ['error' => 'Usuario nao encontrado.']);
+        }
+
+        return $this->app['twig']->render(
+            '/users/profile.twig',
+            [
+                'user' => $user,
+                'lojas' => $this->app['loja.repository']
+            ]
+        );
     }
 
     /**

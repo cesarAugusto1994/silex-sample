@@ -1,0 +1,5 @@
+config.routes:
+  home:
+    paterns: /
+    defaults: { _controller: 'IndexController::indexAction'}
+    method: GET

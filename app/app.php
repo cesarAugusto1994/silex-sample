@@ -22,8 +22,15 @@ $whoops->register();
 $app = new Application;
 
 $app['debug'] = true;
+$app['application.name'] = 'Silex';
 
 require __DIR__ . '/providers.php';
+/*
+$locator = new \Symfony\Component\Config\FileLocator(__DIR__.'/routes.yml');
+$loader = new \Symfony\Component\Routing\Loader\YamlFileLoader($locator);
+
+$app['routtes'] = $loader->load('');
+*/
 require __DIR__ . '/routes.php';
 require __DIR__ . '/services.php';
 

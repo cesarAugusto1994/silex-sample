@@ -120,13 +120,24 @@ $app['security.encoder_factory'] = function ($app) {
 };
 
 $app->boot();
+
+$app->register(new \nymo\Silex\Provider\BreadCrumbServiceProvider());
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
     'twig.options' => array(
         'cache' => __DIR__.'/../var/cache/twig',
         'strict_variables' => true,
     ),));
-
+/*
+$app['twig'] =
+    $app->extend(
+        'twig',
+        function ($twig, $app) {
+            $twig->addExtension(new \nymo\Twig\Extension\BreadCrumbExtension($app));
+            return $twig;
+        }
+);
+*/
 $app['swiftmailer.options'] = array(
     'driver' => 'smtp',
     'host' => 'smtp.gmail.com',

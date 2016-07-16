@@ -70,6 +70,12 @@ class User
      */
     private $active;
 
+    /**
+     * @ORM\Column(name="avatar", type="text")
+     * @var string
+     */
+    private $avatar;
+
     public function getUsername()
     {
         return $this->username;
@@ -191,5 +197,20 @@ class User
         $this->login = $login;
     }
 
+    /**
+     * @return string
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * @param string $avatar
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+    }
     
 }
