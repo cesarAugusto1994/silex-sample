@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class User
  * @package Application
  * @ORM\Entity(repositoryClass="UserRepository")
- * @ORM\Table(name="user", schema="silex")
+ * @ORM\Table(name="user", schema="u690716366_silex")
  */
 class User
 {
