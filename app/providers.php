@@ -19,7 +19,7 @@ $app->register(new \Silex\Provider\DoctrineServiceProvider(), array(
             'dbname' => 'u690716366_silex',
             'user' => 'u690716366_cesar',
             'password' => 'elpro1973',
-            'host' => '	mysql.hostinger.com.br',
+            'host' => 'mysql.hostinger.com.br',
             'driver' => 'pdo_mysql',
         )
     ),
