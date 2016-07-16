@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class EmailConfirmation
  * @package Application\Entity
  * @ORM\Entity(repositoryClass="Application\Entity\EmailConfirmationRepository")
- * @ORM\Table(name="email_confirmation", schema="silex")
+ * @ORM\Table(name="email_confirmation", schema="u690716366_silex")
  */
 class EmailConfirmation
 {
